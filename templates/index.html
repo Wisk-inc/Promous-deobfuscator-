@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Prometheus Lua Deobfuscator</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 2rem auto; padding: 0 1rem; background-color: #f8f9fa; }
+        h1, h2 { color: #0056b3; }
+        .container { background-color: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        textarea { width: 95%; min-height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 14px; }
+        input[type="file"] { margin-top: 1rem; }
+        .btn { display: inline-block; background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 16px; }
+        .btn:hover { background-color: #0056b3; }
+        .or-separator { text-align: center; margin: 1rem 0; font-weight: bold; }
+        .flashes { list-style: none; padding: 0; margin: 1rem 0; }
+        .flashes li { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; }
+        pre { white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prometheus Lua Deobfuscator</h1>
+        <p>Upload a <code>.lua</code> file or paste the obfuscated code below to deobfuscate it.</p>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li><pre>{{ message }}</pre></li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('deobfuscate') }}" method="post" enctype="multipart/form-data">
+            <h2>Paste Code</h2>
+            <textarea name="code" placeholder="Paste your obfuscated Lua code here..."></textarea>
+
+            <div class="or-separator">OR</div>
+
+            <h2>Upload File</h2>
+            <input type="file" name="file" accept=".lua">
+
+            <br><br>
+            <button type="submit" class="btn">Deobfuscate</button>
+        </form>
+    </div>
+</body>
+</html>
